@@ -69,6 +69,15 @@
         button:hover {
             background-color: #45a049;
         }
+
+        #generated-script {
+            white-space: pre-wrap;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -88,28 +97,51 @@
             <input type="text" id="secretary-name" placeholder="Enter your name">
             <button onclick="submitName()">Submit</button>
         </div>
+
+        <!-- Display the generated script -->
+        <div id="generated-script"></div>
     </div>
 
     <script>
-        // JavaScript for handling day selection
+        let selectedDay;
+        let secretaryName;
+
+        // Store the day selected and the secretary's name
         function selectDay(day) {
-            console.log('Selected day:', day); // Log selected day
+            selectedDay = day;
+            console.log('Selected day:', selectedDay); // Log the selected day
             // Hide the day selection section
             document.getElementById('day-selection').style.display = 'none';
             // Show the next step (Secretary name input)
             document.getElementById('next-step').style.display = 'block';
         }
 
-        // JavaScript for handling name submission
         function submitName() {
-            var name = document.getElementById('secretary-name').value;
-            if (name) {
-                console.log("Name submitted:", name); // Log the submitted name
-                alert("Thank you, " + name + "! You've completed the first step.");
+            secretaryName = document.getElementById('secretary-name').value;
+            if (secretaryName) {
+                console.log("Name submitted:", secretaryName); // Log the submitted name
+                generateScript();
             } else {
-                console.log("No name entered"); // Log if no name is entered
                 alert("Please enter your name.");
             }
+        }
+
+        // Generate and display the meeting script
+        function generateScript() {
+            let script = `
+Rogue Format  FOLLOW THE FORMAT
+
+Welcome to the ${selectedDay} Just Some F*cking Online Rogue AA Meeting.
+My name is ${secretaryName}, and I am your alcoholic secretary. So that we may have an uninterrupted meeting, please remain muted if you are not sharing.
+
+I’d like to start the meeting with a moment of silence followed by the serenity prayer.
+
+(Read Prayer): 
+
+"God grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference."
+            `;
+            // Display the generated script in the div
+            document.getElementById('generated-script').innerText = script;
         }
     </script>
 </body>
