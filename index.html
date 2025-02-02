@@ -1,134 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rogue AA Meeting - Day Selection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            overflow: hidden; /* Prevents scrolling when content is hidden */
-        }
-
-        .form-container {
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .section {
-            display: block; /* Ensures sections are visible */
-        }
-
-        .bubble {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .bubble:hover {
-            background-color: #45a049;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            margin-top: 20px;
-            width: 80%;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin-top: 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #generated-script {
-            white-space: pre-wrap;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #f9f9f9;
-            font-family: monospace;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rogue AA Meeting Script Generator</title>
+  <style>
+    /* Base Styles Inspired by Apple.com */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f5f5f7;
+      color: #1d1d1f;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 1.5em;
+      font-weight: 500;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 10px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .bubble {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 1em;
+      background-color: #1d1d1f;
+      color: #fff;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .bubble:hover {
+      background-color: #3a3a3c;
+      transform: scale(1.05);
+    }
+    .chat-message {
+      background-color: #f5f5f7;
+      padding: 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+    #generated-script {
+      background-color: #f5f5f7;
+      padding: 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    #secretary-page, #cohost-instructions {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+    #cohost-instructions {
+      display: none;
+      flex-grow: 1;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 1em;
+      background-color: #1d1d1f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      align-self: flex-start;
+    }
+    button:hover {
+      background-color: #3a3a3c;
+      transform: scale(1.02);
+    }
+    .safety-card {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #1d1d1f;
+    }
+    p {
+      font-size: 1em;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-    <div class="form-container">
-        <div id="day-selection" class="section">
-            <h2>Please select the day of the meeting:</h2>
-            <div class="bubble" onclick="selectDay('Monday')">Monday</div>
-            <div class="bubble" onclick="selectDay('Tuesday')">Tuesday</div>
-            <div class="bubble" onclick="selectDay('Wednesday')">Wednesday</div>
-            <div class="bubble" onclick="selectDay('Thursday')">Thursday</div>
-            <div class="bubble" onclick="selectDay('Friday')">Friday</div>
-            <div class="bubble" onclick="selectDay('Saturday')">Saturday</div>
-            <div class="bubble" onclick="selectDay('Sunday')">Sunday</div>
-        </div>
-        <div id="next-step" class="section" style="display:none;">
-            <h2>Next Step: Enter Your Name</h2>
-            <input type="text" id="secretary-name" placeholder="Enter your name">
-            <button onclick="submitName()">Submit</button>
-        </div>
-
-        <!-- Display the generated script -->
-        <div id="generated-script"></div>
+  <div class="container">
+    <!-- Page One: Secretary (Meeting Script) -->
+    <div id="secretary-page">
+      <h1>Secretary: Meeting Script</h1>
+      <!-- Day Selection -->
+      <div id="day-selection" class="section">
+        <h2>Please select the day of the meeting:</h2>
+        <div class="bubble" onclick="selectDay('Monday')">Monday</div>
+        <div class="bubble" onclick="selectDay('Tuesday')">Tuesday</div>
+        <div class="bubble" onclick="selectDay('Wednesday')">Wednesday</div>
+        <div class="bubble" onclick="selectDay('Thursday')">Thursday</div>
+        <div class="bubble" onclick="selectDay('Friday')">Friday</div>
+        <div class="bubble" onclick="selectDay('Saturday')">Saturday</div>
+        <div class="bubble" onclick="selectDay('Sunday')">Sunday</div>
+      </div>
+      
+      <!-- Secretary Name Input -->
+      <div id="next-step" class="section" style="display:none;">
+        <h2>Next Step: Enter Your Name</h2>
+        <input type="text" id="secretary-name" placeholder="Enter your name" onkeydown="handleKey(event)">
+        <button onclick="submitName()">Submit</button>
+      </div>
+      
+      <!-- First Reading Selection -->
+      <div id="prayer-selection" class="section" style="display:none;">
+        <h2>Select First Reading</h2>
+        <div class="bubble" onclick="selectPrayer('12 Traditions short form')">12 Traditions short form</div>
+        <div class="bubble" onclick="selectPrayer('More about Alcoholism')">More about Alcoholism</div>
+        <div class="bubble" onclick="selectPrayer('Spiritual Experience')">Spiritual Experience</div>
+      </div>
+      
+      <!-- Second Reading Selection -->
+      <div id="second-prayer-selection" class="section" style="display:none;">
+        <h2>Select Second Reading</h2>
+        <div class="bubble" onclick="selectSecondPrayer('Vision for you')">Vision for you</div>
+        <div class="bubble" onclick="selectSecondPrayer('The Promises')">The Promises</div>
+      </div>
+      
+      <!-- Generated Meeting Script -->
+      <div id="generated-script"></div>
+      <!-- Copy Meeting Script Button (initially hidden) -->
+      <button id="copy-script-button" onclick="copyToClipboard('generated-script')" style="display:none;">Copy Meeting Script to Clipboard</button>
+      
+      <!-- Button to show CoHost Instructions (initially hidden) -->
+      <button id="view-cohost-button" onclick="showCohostInstructions()" style="display:none;">Next: View CoHost Instructions</button>
     </div>
-
-    <script>
-        let selectedDay;
-        let secretaryName;
-
-        // Store the day selected and the secretary's name
-        function selectDay(day) {
-            selectedDay = day;
-            console.log('Selected day:', selectedDay); // Log the selected day
-            // Hide the day selection section
-            document.getElementById('day-selection').style.display = 'none';
-            // Show the next step (Secretary name input)
-            document.getElementById('next-step').style.display = 'block';
+    
+    <!-- Page Two: CoHost Instructions -->
+    <div id="cohost-instructions">
+      <h1>CoHost Instructions</h1>
+      <!-- New: Copy All Meeting Postings Button at the Top -->
+      <div class="section">
+        <button onclick="copyAllMeetingPostings()">Copy All Meeting Postings to Clipboard</button>
+      </div>
+      
+      <!-- Section 1: Safety Card -->
+      <div class="section">
+        <h2>Safety Card</h2>
+        <div class="chat-message" id="safety-card-text">
+          Please post the Safety Card when prompted:
+        </div>
+        <button onclick="copyImageToClipboard('safety-card-img')">Copy Safety Card to Clipboard</button>
+        <img id="safety-card-img" class="safety-card" src="https://raw.githubusercontent.com/sjoneshome/RogueAAScript/171a294f3ca8aef51ad85b84a4380d947b0f46a2/Safety%20Card_PDF.jpg" alt="Safety Card" crossOrigin="anonymous">
+      </div>
+      
+      <!-- Section 2: Attendance Verification -->
+      <div class="section">
+        <h2>Attendance Verification</h2>
+        <p>Please post the Attendance Verification when prompted:</p>
+        <div class="chat-message" id="attendance-verification-text">
+          Attendance Verification: Here’s how the new attendance system works! At each meeting, you’ll click on a link that will take you to a form, fill out the form with your first name, last name, the date you attended, and your email. Once you submit it, the system will send you an email confirming your attendance.
+          https://sjoneshome.github.io/Rogue-AA/
+        </div>
+        <button onclick="copyToClipboard('attendance-verification-text')">Copy Attendance Verification to Clipboard</button>
+      </div>
+      
+      <!-- Section 3: How It Works -->
+      <div class="section">
+        <h2>How It Works</h2>
+        <div class="chat-message" id="how-it-works-text">
+          <!-- This will be populated dynamically -->
+        </div>
+        <button onclick="copyToClipboard('how-it-works-text')">Copy How It Works to Clipboard</button>
+      </div>
+      
+      <!-- Section 4: First Selected Reading -->
+      <div class="section">
+        <h2>First Selected Reading</h2>
+        <div class="chat-message" id="first-reading-text">
+          <!-- This will be populated dynamically -->
+        </div>
+        <button id="copy-first-reading-button" onclick="copyToClipboard('first-reading-text')">Copy to Clipboard</button>
+      </div>
+      
+      <!-- Section 5: 7th Tradition -->
+      <div class="section">
+        <h2>7th Tradition</h2>
+        <p>Please post the 7th Tradition when prompted:</p>
+        <div class="chat-message" id="tradition-text">
+          7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly Zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution.
+          7th Tradition: Venmo: Silvia-castillo-40718
+        </div>
+        <button onclick="copyToClipboard('tradition-text')">Copy 7th Tradition to Clipboard</button>
+      </div>
+      
+      <!-- Section 6: Second Selected Reading -->
+      <div class="section">
+        <h2>Second Selected Reading</h2>
+        <div class="chat-message" id="second-reading-text">
+          <!-- This will be populated dynamically -->
+        </div>
+        <button id="copy-second-reading-button" onclick="copyToClipboard('second-reading-text')">Copy to Clipboard</button>
+      </div>
+      
+      <button onclick="goBackToSecretaryPage()">Back to Secretary Page</button>
+    </div>
+  </div>
+  
+  <script>
+    let selectedDay;
+    let secretaryName;
+    let selectedPrayer = "";
+    let selectedSecondPrayer = "";
+    
+    // Global variables for dynamic texts.
+    let dynamicHowItWorksText = "";
+    let dynamicFirstReadingText = "";
+    let dynamicSecondReadingText = "";
+    
+    // Helper: Copy text from an element with the given ID to the clipboard.
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Copied to clipboard!"))
+        .catch(err => alert("Error copying text: " + err));
+    }
+    
+    // Helper: Copy the actual image as a PNG from an image element to the clipboard.
+    async function copyImageToClipboard(imageId) {
+      const img = document.getElementById(imageId);
+      if (!img || !img.complete) {
+        alert("Safety Card image not loaded yet.");
+        return;
+      }
+      try {
+        // Create a canvas and draw the image onto it.
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+    
+        // Convert the canvas content to a Blob in PNG format.
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+        const clipboardItem = new ClipboardItem({ "image/png": blob });
+        await navigator.clipboard.write([clipboardItem]);
+        alert("Safety Card image copied to clipboard!");
+      } catch (err) {
+        alert("Error copying image: " + err);
+      }
+    }
+    
+    // Helper: Copy all meeting postings to clipboard as an HTML snippet.
+    async function copyAllMeetingPostings() {
+      try {
+        // Get the safety card image data URL.
+        const img = document.getElementById('safety-card-img');
+        if (!img || !img.complete) {
+          alert("Safety Card image not loaded yet.");
+          return;
         }
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        const dataURL = canvas.toDataURL("image/png");
+    
+        // Get text from the other sections.
+        const attendanceText = document.getElementById('attendance-verification-text').innerText;
+        const howItWorksText = document.getElementById('how-it-works-text').innerText;
+        const firstReadingText = document.getElementById('first-reading-text').innerText;
+        const traditionText = document.getElementById('tradition-text').innerText;
+        const secondReadingText = document.getElementById('second-reading-text').innerText;
+    
+        // Build an HTML snippet containing all items in order.
+        const htmlContent = `
+<div>
+  <div>
+    <img src="${dataURL}" style="max-width:100%;height:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);" />
+  </div>
+  <div>
+    <p>${attendanceText}</p>
+  </div>
+  <div>
+    <p>${howItWorksText}</p>
+  </div>
+  <div>
+    <p>${firstReadingText}</p>
+  </div>
+  <div>
+    <p>${traditionText}</p>
+  </div>
+  <div>
+    <p>${secondReadingText}</p>
+  </div>
+</div>`;
+    
+        const blob = new Blob([htmlContent], { type: "text/html" });
+        const clipboardItem = new ClipboardItem({ "text/html": blob });
+        await navigator.clipboard.write([clipboardItem]);
+        alert("All meeting postings copied to clipboard!");
+      } catch (error) {
+        alert("Error copying all meeting postings: " + error);
+      }
+    }
+    
+    // Helper: Return the full text for the first selected reading.
+    function getFirstPrayerText() {
+      if (selectedPrayer === "12 Traditions short form") {
+        return `The Twelve Traditions of Alcoholics Anonymous – Short Form
 
-        function submitName() {
-            secretaryName = document.getElementById('secretary-name').value;
-            if (secretaryName) {
-                console.log("Name submitted:", secretaryName); // Log the submitted name
-                generateScript();
-            } else {
-                alert("Please enter your name.");
-            }
+1. Our common welfare should come first; personal recovery depends on AA unity.
+
+2. For our group purpose there is but one ultimate authority—a loving God as He may express Himself in our group conscience. Our leaders are but trusted servants; they do not govern.
+
+3. The only requirement for AA membership is a desire to stop drinking.
+
+4. Each group should be autonomous except in matters affecting other groups or AA as a whole.
+
+5. Each group has but one primary purpose—to carry its message to the alcoholic who still suffers.
+
+6. An AA group ought never endorse, finance or lend the AA name to any related facility or outside enterprise, lest problems of money, property and prestige divert us from our primary purpose.
+
+7. Every AA group ought to be fully self-supporting, declining outside contributions.
+
+8. Alcoholics Anonymous should remain forever non-professional, but our service centers may employ special workers.
+
+9. Alcoholics Anonymous as such, ought never be organized; but we may create service boards or committees directly responsible to those they serve.
+
+10. Alcoholics Anonymous has no opinion on outside issues; hence the AA name ought never be drawn into public controversy.
+
+11. Our public relations policy is based on attraction rather than promotion; we need always maintain personal anonymity at the level of press, radio and films.
+
+12. Anonymity is the spiritual foundation of all our Traditions, ever reminding us to place principles before personalities.`;
+      } else if (selectedPrayer === "More about Alcoholism") {
+        return `Chapter Three – MORE ABOUT ALCOHOLISM
+
+Most of us have been unwilling to admit we were real alcoholics. No person likes to think he is bodily and mentally different from his fellows. Therefore, it is not surprising that our drinking careers have been characterized by countless vain attempts to prove we could drink like other people. The idea that somehow, someday he will control and enjoy his liquor drinking is the great obsession of every abnormal drinker. The persistence of this illusion is astonishing. Many pursue it into the gates of insanity or death.
+
+We learned that we had to fully concede to our innermost selves that we were alcoholics. This is the first step in recovery. The delusion that we are like other people, or presently may be, had to be smashed.
+
+We alcoholics are men and women who had lost the ability to control our drinking. We know that no real alcoholic ever recovered this control. All of us felt at times that we were regaining control, but such intervals—usually brief—were inevitably followed by still less control, which led in time to pitiful and incomprehensible demoralization. We are convinced to a man that alcoholics of our type are in the grip of a progressive illness. Over any considerable period we get worse, never better.
+
+We are like men who have lost their legs; they never grow new ones. Neither does there appear to be any kind of treatment which will make alcoholics of our kind like other men. We have tried every imaginable remedy. In some instances there has been brief recovery, followed always by still worse relapse. Physicians who are familiar with alcoholism agree there is no such thing as making a normal drinker out of an alcoholic. Science may one day accomplish this, but it evidently hasn't done so yet.
+
+Despite all we can say, many who are real alcoholics are not going to believe they are in that class. By every form of self-deception and experimentation, they will try to prove themselves exceptions to the rule, therefore non-alcoholic. If anyone, who is showing inability to control his drinking, can do the right-about-face and drink like a gentleman, our hats are off to him. Heaven knows, we have tried hard enough and long enough to drink like other people!`;
+      } else if (selectedPrayer === "Spiritual Experience") {
+        return `The terms “spiritual experience” and “spiritual awakening” are used many times in this book which, upon careful reading, shows that the personality change sufficient to bring about recovery from alcoholism has manifested itself among us in many different forms.
+
+Yet it is true that our first printing (Alcoholics Anonymous) gave many readers the impression that these personality changes, or religious experiences, must be in the nature of sudden and spectacular upheavals. Happily for everyone, this conclusion is erroneous.
+
+In the first few chapters a number of sudden revolutionary changes are described. Though it was not our intention to create such an impression, many alcoholics have nevertheless concluded that in order to recover they must acquire an immediate and overwhelming “God-consciousness” followed at once by a vast change in feeling and outlook.
+
+Among our rapidly growing membership of thousands of alcoholics such transformations, though frequent, are by no means the rule. Most of our experiences are what the psychologist William James calls the “educational variety” because they develop slowly over a period of time. Quite often friends of the newcomer are aware of the difference long before he is himself. He finally realizes that he has undergone a profound alteration in his reaction to life; that such a change could hardly have been brought about by himself alone. What often takes place in a few months could seldom have been accomplished by years of self-discipline. With few exceptions our members find that they have tapped an unsuspected inner resource which they presently identify with their own conception of a Power greater than themselves.
+
+Most of us think this awareness of a Power greater than ourselves is the essence of spiritual experience. Our more religious members call it “God-consciousness.”
+
+Most emphatically we wish to say that any alcoholic capable of honestly facing his problems in the light of our experience can recover, provided he does not close his mind to all spiritual concepts. He can only be defeated by an attitude of intolerance or belligerent denial.
+
+We find that no one need have difficulty with the spirituality of the program. Willingness, honesty and open mindedness are the essentials of recovery. But these are indispensable.
+
+“There is a principle which is a bar against all information, which is proof against all arguments and which cannot fail to keep a man in everlasting ignorance—that principle is contempt prior to investigation.”
+
+— Herbert Spencer`;
+      }
+      return "";
+    }
+    
+    // Helper: Return the full text for the "How It Works" reading.
+    function getHowItWorksText() {
+      return `Chapter Five
+HOW IT WORKS
+      
+Rarely have we seen a person fail who has thoroughly followed our path. Those who do not recover are people who cannot or will not completely give themselves to this simple program, usually men and women who are constitutionally incapable of being honest with themselves. There are such unfortunates. They are not at fault; they seem to have been born that way. They are naturally incapable of grasping and developing a manner of living which demands rigorous honesty. Their chances are less than average. There are those, too, who suffer from grave emotional and mental disorders, but many of them do recover if they have the capacity to be honest.
+Our stories disclose in a general way what we used to be like, what happened, and what we are like now. If you have decided you want what we have and are willing to go to any length to get it - then you are ready to take certain steps.
+ At some of these we balked. We thought that we could find an easier, softer way. But we could not. With all the earnestness at our command, we beg of you to be fearless and thorough from the very start. Some of us have tried to hold on to our old ideas and the result was nil until we let go absolutely.
+Remember that we deal with alcohol - cunning, baffling, powerful! Without help it is too much for us. But there is One who has all power - that One is God. May you find Him now!
+Half measures availed us nothing. We stood at the turning point. We asked His protection and care with complete abandon.
+Here are the steps we took, which are suggested as a program of recovery:
+1. We admitted we were powerless over alcohol - that our lives had become unmanageable. 
+2. Came to believe that a Power greater than ourselves could restore us to sanity. 
+3. Made a decision to turn our will and our lives over to the care of God as we understood Him. 
+4. Made a searching and fearless moral inventory of ourselves. 
+5. Admitted to God, to ourselves, and to another human being the exact nature of our wrongs. 
+6. Were entirely ready to have God remove all these defects of character. 
+7. Humbly asked Him to remove our shortcomings. 
+8. Made a list of all persons we had harmed, and became willing to make amends to them all. 
+9. Made direct amends to such people wherever possible, except when to do so would injure them or others. 
+10. Continued to take personal inventory and when we were wrong promptly admitted it. 
+11. Sought through prayer and meditation to improve our conscious contact with God as we understood Him, praying only for knowledge of His will for us and the power to carry that out. 
+12. Having had a spiritual awakening as the result of these steps, we tried to carry this message to alcoholics, and to practice these principles in all our affairs.           
+Many of us exclaimed, "What an order! I can't go through with it." Do not be discouraged. No one among us has been able to maintain anything like perfect adherence to these principles. We are not saints. The point is, that we are willing to grow along spiritual lines. The principles we have set down are guides to progress. We claim spiritual progress rather than spiritual perfection.
+          Our description of the alcoholic, the chapter to the agnostic, and our personal adventures before and after make clear three pertinent ideas:
+	(a) That we were alcoholic and could not manage our own lives.
+	(b) That probably no human power could have relieved our alcoholism.
+	(c) That God could and would if He were sought.`;
+    }
+    
+    // Helper: Return the full text for the second selected reading.
+    function getSecondPrayerText() {
+      if (selectedSecondPrayer.toLowerCase() === "vision for you") {
+        return `Chapter Eleven – A VISION FOR YOU
+
+Our book is meant to be suggestive only. We realize we know only a little. God will constantly disclose more to you and to us. Ask him in your morning meditation what you can do each day for the man who is still sick. The answers will come, if your own house is in order. But obviously you cannot transmit something you haven't got. See to it that your relationship with Him is right, and great events will come to pass for you and countless others. This is the Great Fact for us.
+
+Abandon yourself to God as you understand God. Admit your faults to him and your fellows. Clear away the wreckage of your past. Give freely of what you find, and join us. We shall be with you, in the Fellowship of The Spirit, and you will surely meet some of us as you trudge the Road of Happy Destiny.
+
+May God bless you and keep you - until then.`;
+      } else if (selectedSecondPrayer === "The Promises") {
+        return `If we are painstaking about this phase of our development, we will be amazed before we are half way through. We are going to know a new freedom and a new happiness. We will not regret the past nor wish to shut the door on it. We will comprehend the word serenity and we will know peace. No matter how far down the scale we have gone, we will see how our experience can benefit others. That feeling of uselessness and self-pity will disappear. We will lose interest in selfish things and gain interest in our fellows. Self-seeking will slip away. Our whole attitude and outlook upon life will change. Fear of people and of economic insecurity will leave us. We will intuitively know how to handle situations which used to baffle us. We will suddenly realize that God is doing for us what we could not do for ourselves.
+
+Are these extravagant promises? We think not. They are being fulfilled among us—sometimes quickly, sometimes slowly. They will always materialize if we work for them.`;
+      }
+      return "";
+    }
+    
+    function selectDay(day) {
+      selectedDay = day;
+      document.getElementById('day-selection').style.display = 'none';
+      document.getElementById('next-step').style.display = 'block';
+      setTimeout(function() {
+        const nameInput = document.getElementById('secretary-name');
+        if (nameInput) {
+          nameInput.focus();
+        } else {
+          console.error('Input field with ID "secretary-name" not found.');
         }
-
-        // Generate and display the meeting script
-        function generateScript() {
-            let script = `
+      }, 300);
+    }
+    
+    function submitName() {
+      secretaryName = document.getElementById('secretary-name').value;
+      if (secretaryName) {
+        document.getElementById('next-step').style.display = 'none';
+        document.getElementById('prayer-selection').style.display = 'block';
+      } else {
+        alert("Please enter your name.");
+      }
+    }
+    
+    function selectPrayer(prayer) {
+      selectedPrayer = prayer;
+      document.getElementById('prayer-selection').style.display = 'none';
+      document.getElementById('second-prayer-selection').style.display = 'block';
+    }
+    
+    function selectSecondPrayer(prayer) {
+      selectedSecondPrayer = prayer;
+      document.getElementById('second-prayer-selection').style.display = 'none';
+      generateScript();
+    }
+    
+    function generateScript() {
+      // Retrieve the full texts.
+      const howItWorksText = getHowItWorksText();
+      const firstPrayerText = getFirstPrayerText();
+      const secondPrayerText = getSecondPrayerText();
+      
+      // Build dynamic labels for the readings.
+      const firstReadingLabel = "(Friend reads " + selectedPrayer + "):";
+      const secondReadingLabel = "(Friend reads " + selectedSecondPrayer + "):";
+    
+      let script = `
 Rogue Format  FOLLOW THE FORMAT
 
 Welcome to the ${selectedDay} Just Some F*cking Online Rogue AA Meeting.
@@ -136,13 +513,109 @@ My name is ${secretaryName}, and I am your alcoholic secretary. So that we may h
 
 I’d like to start the meeting with a moment of silence followed by the serenity prayer.
 
-(Read Prayer): 
+(Read Prayer):
 
-"God grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference."
-            `;
-            // Display the generated script in the div
-            document.getElementById('generated-script').innerText = script;
+God grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference
+
+PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy, neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.
+
+(Ask the CoHost to post the Safety Card)
+We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful & respectful of the room. We ask that you remain muted, unless called on. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap your share up when you hear the beep.  (Ask the CoHost to take care of the timer)
+
+(Ask the CoHost to post the Attendance Verification)
+Attendance Verification: Here’s how the new attendance system works! At each meeting, you’ll click on a link that will take you to a form, fill out the form with your first name, last name, the date you attended, and your email. Once you submit it, the system will send you an email confirming your attendance.
+https://sjoneshome.github.io/Rogue-AA/
+
+I’ve asked a friend to read How It Works from the Big Book of Alcoholics Anonymous.
+(Friend reads How It Works):
+
+${howItWorksText}
+
+I’ve asked a friend to read ${selectedPrayer}
+${firstReadingLabel}
+
+${firstPrayerText}
+
+Not to embarrass anyone but to get to know you better after the meeting. Is there anyone with less than 30 days continuous sobriety please introduce yourself by your first name. (Take notes of newcomers, out of towners and first timers)
+Anyone here for the 1st time or anyone from outside the San Diego area that has not been here before?
+Welcome everyone!
+
+We celebrate earned lengths of sobriety 30, 60, 90 days, 6 months, 9 months, a year and for each year after. Anyone celebrating any of these lengths of time? (Ask them how they did it?) Congratulations to everyone on another 24hrs.
+(Take note of any celebrations) (Please have celebrants message host or co-hosts their info & milestone length of time so we can send them a chip. (Send me the info)
+
+If you are willing to sponsor please put your info in the chat; those with questions please stay for the meeting after the meeting.
+
+(Ask the CoHost to post the 7th Tradition)
+Please post the 7th Tradition reminder when prompted:
+7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly Zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution.
+7th Tradition: Venmo: Silvia-castillo-40718
+
+For the 1st half of the meeting we will call on people to share; the second half we will open it up to those that have not yet had the opportunity to share. At this meeting we do not cross talk or provide other members advice or specific feedback—cross talk. In order for members to feel they can share freely and openly. (This includes host, secretary of meeting)
+If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.
+
+Closing (11:15 p.m.)
+That’s all the time we have for sharing today. Like to welcome newcomers, first timers, outta towners, and celebrants. (Announce the names of newcomers, out of towners, and first timers.) If you wanted to share during the meeting and did not get a chance to, please reach out in the chat or stay for the meeting after the meeting.
+
+As a reminder to all: “What you see here, what you hear here, when you leave here, let it stay here.”
+
+Are there any AA announcements? Any non-AA announcements?
+
+If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand.
+
+I’ve asked a friend to read ${selectedSecondPrayer}
+${secondReadingLabel}
+
+${secondPrayerText}
+
+I’ve asked a friend to lead us out with the serenity prayer of their choice.
+(Friend reads serenity prayer of their choice): “God”`;
+    
+      document.getElementById('generated-script').innerText = script;
+      // Store dynamic texts in global variables for CoHost page.
+      dynamicHowItWorksText = howItWorksText;
+      dynamicFirstReadingText = firstPrayerText;
+      dynamicSecondReadingText = secondPrayerText;
+      // Show the Copy Meeting Script button and the View CoHost Instructions button now that a script has been generated.
+      document.getElementById('copy-script-button').style.display = 'block';
+      document.getElementById('view-cohost-button').style.display = 'block';
+      
+      // Populate the CoHost sections for the readings.
+      document.getElementById('how-it-works-text').innerText = howItWorksText;
+      document.getElementById('first-reading-text').innerText = firstPrayerText;
+      document.getElementById('second-reading-text').innerText = secondPrayerText;
+      
+      // Update the copy button labels for the readings dynamically.
+      document.getElementById('copy-first-reading-button').innerText = "Copy " + selectedPrayer + " to Clipboard";
+      document.getElementById('copy-second-reading-button').innerText = "Copy " + selectedSecondPrayer + " to Clipboard";
+    }
+    
+    function showCohostInstructions() {
+      document.getElementById('secretary-page').style.display = 'none';
+      document.getElementById('cohost-instructions').style.display = 'block';
+    }
+    
+    function goBackToSecretaryPage() {
+      document.getElementById('cohost-instructions').style.display = 'none';
+      document.getElementById('secretary-page').style.display = 'block';
+    }
+    
+    // Listen for Enter key for secretary name input.
+    function handleKey(event) {
+      if (event.key === "Enter") {
+        submitName();
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const nameInput = document.getElementById('secretary-name');
+        if (nameInput) {
+          nameInput.focus();
+        } else {
+          console.error('Input field with ID "secretary-name" not found.');
         }
-    </script>
+      }, 300);
+    });
+  </script>
 </body>
 </html>
