@@ -20,7 +20,7 @@
       padding: 40px;
       background-color: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     h1 {
       text-align: center;
@@ -231,7 +231,7 @@
         <h2>7th Tradition</h2>
         <p>Please post the 7th Tradition when prompted:</p>
         <div class="chat-message" id="tradition-text">
-          7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly Zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution.
+          7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution here.
           7th Tradition: Venmo: Silvia-castillo-40718
         </div>
         <button onclick="copyToClipboard('tradition-text')">Copy 7th Tradition to Clipboard</button>
@@ -277,14 +277,11 @@
         return;
       }
       try {
-        // Create a canvas and draw the image onto it.
         const canvas = document.createElement("canvas");
         canvas.width = img.naturalWidth;
         canvas.height = img.naturalHeight;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0);
-    
-        // Convert the canvas content to a Blob in PNG format.
         const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
         const clipboardItem = new ClipboardItem({ "image/png": blob });
         await navigator.clipboard.write([clipboardItem]);
@@ -297,7 +294,6 @@
     // Helper: Copy all meeting postings to clipboard as an HTML snippet.
     async function copyAllMeetingPostings() {
       try {
-        // Get the safety card image data URL.
         const img = document.getElementById('safety-card-img');
         if (!img || !img.complete) {
           alert("Safety Card image not loaded yet.");
@@ -310,14 +306,12 @@
         ctx.drawImage(img, 0, 0);
         const dataURL = canvas.toDataURL("image/png");
     
-        // Get text from the other sections.
         const attendanceText = document.getElementById('attendance-verification-text').innerText;
         const howItWorksText = document.getElementById('how-it-works-text').innerText;
         const firstReadingText = document.getElementById('first-reading-text').innerText;
         const traditionText = document.getElementById('tradition-text').innerText;
         const secondReadingText = document.getElementById('second-reading-text').innerText;
     
-        // Build an HTML snippet containing all items in order.
         const htmlContent = `
 <div>
   <div>
@@ -414,31 +408,39 @@ We find that no one need have difficulty with the spirituality of the program. W
     // Helper: Return the full text for the "How It Works" reading.
     function getHowItWorksText() {
       return `Chapter Five
+
 HOW IT WORKS
       
 Rarely have we seen a person fail who has thoroughly followed our path. Those who do not recover are people who cannot or will not completely give themselves to this simple program, usually men and women who are constitutionally incapable of being honest with themselves. There are such unfortunates. They are not at fault; they seem to have been born that way. They are naturally incapable of grasping and developing a manner of living which demands rigorous honesty. Their chances are less than average. There are those, too, who suffer from grave emotional and mental disorders, but many of them do recover if they have the capacity to be honest.
+
 Our stories disclose in a general way what we used to be like, what happened, and what we are like now. If you have decided you want what we have and are willing to go to any length to get it - then you are ready to take certain steps.
- At some of these we balked. We thought that we could find an easier, softer way. But we could not. With all the earnestness at our command, we beg of you to be fearless and thorough from the very start. Some of us have tried to hold on to our old ideas and the result was nil until we let go absolutely.
+
+At some of these we balked. We thought that we could find an easier, softer way. But we could not. With all the earnestness at our command, we beg of you to be fearless and thorough from the very start. Some of us have tried to hold on to our old ideas and the result was nil until we let go absolutely.
+
 Remember that we deal with alcohol - cunning, baffling, powerful! Without help it is too much for us. But there is One who has all power - that One is God. May you find Him now!
 Half measures availed us nothing. We stood at the turning point. We asked His protection and care with complete abandon.
+
 Here are the steps we took, which are suggested as a program of recovery:
-1. We admitted we were powerless over alcohol - that our lives had become unmanageable. 
-2. Came to believe that a Power greater than ourselves could restore us to sanity. 
-3. Made a decision to turn our will and our lives over to the care of God as we understood Him. 
-4. Made a searching and fearless moral inventory of ourselves. 
-5. Admitted to God, to ourselves, and to another human being the exact nature of our wrongs. 
-6. Were entirely ready to have God remove all these defects of character. 
-7. Humbly asked Him to remove our shortcomings. 
-8. Made a list of all persons we had harmed, and became willing to make amends to them all. 
-9. Made direct amends to such people wherever possible, except when to do so would injure them or others. 
-10. Continued to take personal inventory and when we were wrong promptly admitted it. 
-11. Sought through prayer and meditation to improve our conscious contact with God as we understood Him, praying only for knowledge of His will for us and the power to carry that out. 
-12. Having had a spiritual awakening as the result of these steps, we tried to carry this message to alcoholics, and to practice these principles in all our affairs.           
+
+1. We admitted we were powerless over alcohol - that our lives had become unmanageable.
+2. Came to believe that a Power greater than ourselves could restore us to sanity.
+3. Made a decision to turn our will and our lives over to the care of God as we understood Him.
+4. Made a searching and fearless moral inventory of ourselves.
+5. Admitted to God, to ourselves, and to another human being the exact nature of our wrongs.
+6. Were entirely ready to have God remove all these defects of character.
+7. Humbly asked Him to remove our shortcomings.
+8. Made a list of all persons we had harmed, and became willing to make amends to them all.
+9. Made direct amends to such people wherever possible, except when to do so would injure them or others.
+10. Continued to take personal inventory and when we were wrong promptly admitted it.
+11. Sought through prayer and meditation to improve our conscious contact with God as we understood Him, praying only for knowledge of His will for us and the power to carry that out.
+12. Having had a spiritual awakening as the result of these steps, we tried to carry this message to alcoholics, and to practice these principles in all our affairs.
+
 Many of us exclaimed, "What an order! I can't go through with it." Do not be discouraged. No one among us has been able to maintain anything like perfect adherence to these principles. We are not saints. The point is, that we are willing to grow along spiritual lines. The principles we have set down are guides to progress. We claim spiritual progress rather than spiritual perfection.
-          Our description of the alcoholic, the chapter to the agnostic, and our personal adventures before and after make clear three pertinent ideas:
-	(a) That we were alcoholic and could not manage our own lives.
-	(b) That probably no human power could have relieved our alcoholism.
-	(c) That God could and would if He were sought.`;
+
+Our description of the alcoholic, the chapter to the agnostic, and our personal adventures before and after make clear three pertinent ideas:
+  (a) That we were alcoholic and could not manage our own lives.
+  (b) That probably no human power could have relieved our alcoholism.
+  (c) That God could and would if He were sought.`;
     }
     
     // Helper: Return the full text for the second selected reading.
@@ -506,10 +508,10 @@ Are these extravagant promises? We think not. They are being fulfilled among us�
       const secondReadingLabel = "(Friend reads " + selectedSecondPrayer + "):";
     
       let script = `
-Rogue Format  FOLLOW THE FORMAT
+Rogue Format FOLLOW THE FORMAT
 
 Welcome to the ${selectedDay} Just Some F*cking Online Rogue AA Meeting.
-My name is ${secretaryName}, and I am your alcoholic secretary. So that we may have an uninterrupted meeting, please remain muted if you are not sharing.
+My name is ${secretaryName}, and I am your alcoholic secretary. So that we may have an uninterrupted meeting, please remain muted if you are not sharing.  
 
 I’d like to start the meeting with a moment of silence followed by the serenity prayer.
 
@@ -517,16 +519,16 @@ I’d like to start the meeting with a moment of silence followed by the serenit
 
 God grant me the serenity to accept the things I cannot change, the courage to change the things I can, and the wisdom to know the difference
 
-PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy, neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.
+PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy, neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.  
 
 (Ask the CoHost to post the Safety Card)
 We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful & respectful of the room. We ask that you remain muted, unless called on. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap your share up when you hear the beep.  (Ask the CoHost to take care of the timer)
 
 (Ask the CoHost to post the Attendance Verification)
 Attendance Verification: Here’s how the new attendance system works! At each meeting, you’ll click on a link that will take you to a form, fill out the form with your first name, last name, the date you attended, and your email. Once you submit it, the system will send you an email confirming your attendance.
-https://sjoneshome.github.io/Rogue-AA/
+https://sjoneshome.github.io/Rogue-AA/  
 
-I’ve asked a friend to read How It Works from the Big Book of Alcoholics Anonymous.
+I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.  
 (Friend reads How It Works):
 
 ${howItWorksText}
@@ -540,21 +542,23 @@ Not to embarrass anyone but to get to know you better after the meeting. Is ther
 Anyone here for the 1st time or anyone from outside the San Diego area that has not been here before?
 Welcome everyone!
 
-We celebrate earned lengths of sobriety 30, 60, 90 days, 6 months, 9 months, a year and for each year after. Anyone celebrating any of these lengths of time? (Ask them how they did it?) Congratulations to everyone on another 24hrs.
-(Take note of any celebrations) (Please have celebrants message host or co-hosts their info & milestone length of time so we can send them a chip. (Send me the info)
+We celebrate earned lengths of sobriety 30, 60, 90 days 6 months 9 months, a year and for each year after. Anyone celebrating any of these lengths of time? (Ask them how they did it?) Congratulations to everyone on another 24hrs. (Take note of any celebrations) (Please have celebrants message host or co hosts their info & milestone length of time so we can send them a chip). (Send me the info)
 
-If you are willing to sponsor please put your info in the chat; those with questions please stay for the meeting after the meeting.
+If you are willing to sponsor please put your info in the chat, those with questions please stay for the meeting after the meeting.
 
 (Ask the CoHost to post the 7th Tradition)
-Please post the 7th Tradition reminder when prompted:
-7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly Zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution.
-7th Tradition: Venmo: Silvia-castillo-40718
+7th Tradition states we are fully self supporting through our own contributions, please give what you can. In order to pay for our yearly zoom subscription and for email verification service we need to collect $20 per month. Thank you in advance for your contribution here.
+7th Tradition: Venmo: Silvia-castillo-40718  
 
-For the 1st half of the meeting we will call on people to share; the second half we will open it up to those that have not yet had the opportunity to share. At this meeting we do not cross talk or provide other members advice or specific feedback—cross talk. In order for members to feel they can share freely and openly. (This includes host, secretary of meeting)
+(Select a reading from AA Approved Literature and read to group.  Announce the topic and share for 3-5 minutes.  Open up for discussion.)
+
+For the 1st half of the meeting we will call on people to share, the second half we will open it up to those that have not yet had the opportunity to share. At this meeting we do not cross talk, or provide other members advice or specific feedback, in order for members to feel they can share freely and openly. (This includes host, secretary of meeting)
 If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.
 
+(Discussion Period)  
+
 Closing (11:15 p.m.)
-That’s all the time we have for sharing today. Like to welcome newcomers, first timers, outta towners, and celebrants. (Announce the names of newcomers, out of towners, and first timers.) If you wanted to share during the meeting and did not get a chance to, please reach out in the chat or stay for the meeting after the meeting.
+That’s all the time we have for sharing today. Like to welcome newcomers, first timers, outta towners & celebrants.(Announce the names of newcomers, out of towners and first timers). If you wanted to share during the meeting and did not get a chance to, please reach out in the chat, or stay for the meeting after the meeting.  
 
 As a reminder to all: “What you see here, what you hear here, when you leave here, let it stay here.”
 
