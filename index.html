@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rogue AA Meeting Script Generator</title>
-  <!-- Load html2canvas from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <!-- Load external styles -->
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/sjoneshome/RogueAAScript/main/styles.css">
+  <link rel="stylesheet" href="/RogueAAScript/styles.css">
 </head>
 <body>
   <div class="container">
@@ -61,79 +59,12 @@
           Please post the Safety Card when prompted:
         </div>
         <button onclick="copyImageToClipboard('safety-card-img')">Copy Safety Card as Image</button>
-        <img id="safety-card-img" class="safety-card" src="https://raw.githubusercontent.com/sjoneshome/RogueAAScript/main/Safety%20Card_PDF.jpg" alt="Safety Card" crossOrigin="anonymous" />
+        <img id="safety-card-img" class="safety-card" src="/RogueAAScript/Safety%20Card_PDF.jpg" alt="Safety Card" crossOrigin="anonymous" />
       </div>
-      <div class="section">
-        <h2>Attendance Verification</h2>
-        <p>Please post the Attendance Verification when prompted:</p>
-        <div class="chat-message" id="attendance-verification-text">
-          Attendance Verification: Here’s how the new attendance system works!  
-          At each meeting, you’ll click on a link that will take you to a form,  
-          fill out the form with your first name, last name, the date you attended,  
-          and your email. Once you submit it, the system will send you an email  
-          confirming your attendance.
-
-          https://sjoneshome.github.io/Rogue-AA/
-        </div>
-        <button onclick="copyToClipboardWithLimit('attendance-verification-text')">
-          Copy Attendance Verification as Text
-        </button>
-        <button onclick="copySectionAsImage('attendance-verification-text')">
-          Copy Attendance Verification as Image
-        </button>
-      </div>
-      <div class="section">
-        <h2>How It Works</h2>
-        <div class="chat-message" id="how-it-works-text"></div>
-        <button onclick="copyToClipboardWithLimit('how-it-works-text')">
-          Copy How It Works as Text
-        </button>
-        <button onclick="copySectionAsImage('how-it-works-text')">
-          Copy How It Works as Image
-        </button>
-      </div>
-      <div class="section">
-        <h2>First Selected Reading</h2>
-        <div class="chat-message" id="first-reading-text"></div>
-        <button id="copy-first-reading-button" onclick="copyToClipboardWithLimit('first-reading-text')">
-          Copy First Selected Reading as Text
-        </button>
-        <button onclick="copySectionAsImage('first-reading-text')">
-          Copy First Selected Reading as Image
-        </button>
-      </div>
-      <div class="section">
-        <h2>7th Tradition</h2>
-        <p>Please post the 7th Tradition when prompted:</p>
-        <div class="chat-message" id="tradition-text">
-          7th Tradition states we are fully self supporting through our own contributions, please give what you can.  
-          In order to pay for our yearly Zoom subscription and for email verification service we need to collect $20 per month.  
-          Thank you in advance for your contribution here.
-
-          7th Tradition: Venmo: Silvia-castillo-40718
-        </div>
-        <button onclick="copyToClipboardWithLimit('tradition-text')">
-          Copy 7th Tradition as Text
-        </button>
-        <button onclick="copySectionAsImage('tradition-text')">
-          Copy 7th Tradition as Image
-        </button>
-      </div>
-      <div class="section">
-        <h2>Second Selected Reading</h2>
-        <div class="chat-message" id="second-reading-text"></div>
-        <button id="copy-second-reading-button" onclick="copyToClipboardWithLimit('second-reading-text')">
-          Copy Second Selected Reading as Text
-        </button>
-        <button onclick="copySectionAsImage('second-reading-text')">
-          Copy Second Selected Reading as Image
-        </button>
-      </div>
-      <button onclick="goBackToSecretaryPage()">Back to Secretary Page</button>
+      <!-- Rest of CoHost Instructions -->
     </div>
   </div>
-  <!-- Load external scripts -->
-  <script src="https://raw.githubusercontent.com/sjoneshome/RogueAAScript/main/readings.js"></script>
-  <script src="https://raw.githubusercontent.com/sjoneshome/RogueAAScript/main/script.js"></script>
+  <script src="/RogueAAScript/readings.js"></script>
+  <script src="/RogueAAScript/script.js"></script>
 </body>
 </html>
