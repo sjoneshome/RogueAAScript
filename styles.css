@@ -1,0 +1,160 @@
+/* Base Styles Inspired by Apple.com */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
+}
+.section {
+  margin-bottom: 40px;
+}
+.bubble {
+  display: inline-block;
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 1em;
+  background-color: #1d1d1f;
+  color: #fff;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.bubble:hover {
+  background-color: #3a3a3c;
+  transform: scale(1.05);
+}
+.chat-message {
+  background-color: #f5f5f7;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+#generated-script {
+  background-color: #f5f5f7;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+#secretary-page, #cohost-instructions {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+#cohost-instructions {
+  display: none;
+  flex-grow: 1;
+}
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 1em;
+  background-color: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;
+}
+button:hover {
+  background-color: #3a3a3c;
+  transform: scale(1.02);
+}
+.safety-card {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+}
+input[type="text"]:focus {
+  outline: none;
+  border-color: #1d1d1f;
+}
+p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 90%;
+}
+.modal-content p {
+  margin-bottom: 20px;
+}
+#progress-bar-container {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#progress-bar {
+  width: 0%;
+  height: 20px;
+  background-color: #1d1d1f;
+  border-radius: 5px;
+}
