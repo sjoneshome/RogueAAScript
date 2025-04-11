@@ -261,6 +261,17 @@ function generateScript() {
   const firstReadingLabel = "(Friend reads " + selectedPrayer + "):";
   const secondReadingLabel = "(Friend reads " + selectedSecondPrayer + "):";
 
+  // Define source information for each reading
+  const howItWorksSource = "Source: Big Book, Chapter 5, pages 58-60, start at 'Rarely have we seen a person fail...' and stop at 'That God could and would if He were sought.'";
+  const firstPrayerSource = selectedPrayer === "12 Traditions short form" 
+    ? "Source: Big Book, Appendix I, page 562, start at '1. Our common welfare...' and stop at '12. Anonymity is the spiritual foundation...'" 
+    : selectedPrayer === "More about Alcoholism" 
+    ? "Source: Big Book, Chapter 3, pages 30-32, start at 'Most of us have been unwilling...' and stop at 'we could increase the list ad infinitum.'" 
+    : "Source: Big Book, Appendix II, pages 567-568, start at 'The terms \"spiritual experience\"...' and stop at '— Herbert Spencer.'";
+  const secondPrayerSource = selectedSecondPrayer === "Vision for you" 
+    ? "Source: Big Book, Chapter 11, page 164, start at 'Our book is meant to be suggestive only...' and stop at 'May God bless you and keep you—until then.'" 
+    : "Source: Big Book, Chapter 6, pages 83-84, start at 'If we are painstaking about this phase...' and stop at 'They will always materialize if we work for them.'";
+
   let script = `
 Rogue Format
 FOLLOW THE FORMAT
@@ -280,11 +291,13 @@ PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their 
 We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)
 
 I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.
+(${howItWorksSource})
 (Friend reads How It Works):
 
 ${howItWorksText}
 
 I’ve asked a friend to read ${selectedPrayer}
+(${firstPrayerSource})
 ${firstReadingLabel}
 
 ${firstPrayerText}
@@ -327,6 +340,7 @@ Any non-AA announcements?
 If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.
 
 I’ve asked a friend to read ${selectedSecondPrayer}
+(${secondPrayerSource})
 ${secondReadingLabel}
 
 ${secondPrayerText}
