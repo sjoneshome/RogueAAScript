@@ -150,17 +150,9 @@ button:hover {
 /* Style for source information */
 .source-info {
   font-style: italic;
-  color: #555 !important; /* Revert to gray, ensure visibility */
+  color: #555;
   margin-bottom: 5px;
-  display: block !important; /* Ensure it’s visible */
-}
-
-/* Ensure source info is visible in CoHost section */
-.chat-message .source-info {
-  font-style: italic;
-  color: #555 !important;
-  margin-bottom: 5px;
-  display: block !important;
+  display: block;
 }
 
 /* Style for reading content */
