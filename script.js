@@ -340,7 +340,7 @@ function generateScript() {
     "",
     "If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.",
     "",
-    `I’ve asked a friend to read ${selectedPrayer}`,
+    `I’ve asked a friend to read ${selectedSecondPrayer}`,
     `<span class="source-info">${secondPrayerSource}</span>`,
     secondReadingLabel,
     "",
@@ -368,9 +368,23 @@ function generateScript() {
   // Debug: Log the DOM content after rendering
   console.log("Rendered DOM content:", scriptContainer.innerHTML);
 
-  document.getElementById('how-it-works-text').textContent = howItWorksText;
-  document.getElementById('first-reading-text').textContent = firstPrayerText;
-  document.getElementById('second-reading-text').textContent = secondPrayerText;
+  // Populate the CoHost section with source information
+  const howItWorksHTML = `
+    <p class="source-info">${howItWorksSource}</p>
+    <div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>
+  `;
+  const firstReadingHTML = `
+    <p class="source-info">${firstPrayerSource}</p>
+    <div class="reading-content">${firstPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>
+  `;
+  const secondReadingHTML = `
+    <p class="source-info">${secondPrayerSource}</p>
+    <div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>
+  `;
+
+  document.getElementById('how-it-works-text').innerHTML = howItWorksHTML;
+  document.getElementById('first-reading-text').innerHTML = firstReadingHTML;
+  document.getElementById('second-reading-text').innerHTML = secondReadingHTML;
 
   document.getElementById('copy-script-button').style.display = 'block';
   document.getElementById('view-cohost-button').style.display = 'block';
