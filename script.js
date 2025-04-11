@@ -6,13 +6,13 @@ let selectedSecondPrayer = "";
 
 // Schedule Data
 const schedule = {
-  "Sunday": { secretary: "Sophie P", host: "Sophie P", cohost: "Eliseo" },
-  "Monday": { secretary: "M", host: "M", cohost: "Francine" },
-  "Tuesday": { secretary: "Vanessa aka Skittles", host: "Vanessa aka Skittles", cohost: "Alice" },
-  "Wednesday": { secretary: "Carlton", host: "Carlton", cohost: "Eliseo" },
-  "Thursday": { secretary: "Stacie Donahue", host: "Stacie Donahue", cohost: "Stephen" },
-  "Friday": { secretary: "Dayna D & Chris Junghans", host: "Dayna D & Chris Junghans", cohost: "Alice" },
-  "Saturday": { secretary: "Stephen Jones", host: "Stephen Jones", cohost: "Alice or Francine (rotating)" }
+  "Sunday": { secretary: "Sophie", host: "Alice", cohost: "Eliseo" },
+  "Monday": { secretary: "Mea", host: "Alice", cohost: "Francine" },
+  "Tuesday": { secretary: "Vanessa", host: "Stephen", cohost: "Alice" },
+  "Wednesday": { secretary: "Carlton", host: "Stephen", cohost: "Eliseo" },
+  "Thursday": { secretary: "Stacie", host: "Eliseo", cohost: "Stephen" },
+  "Friday": { secretary: "Dayna or Chris", host: "Francine", cohost: "Alice" },
+  "Saturday": { secretary: "Stephen", host: "Eliseo", cohost: "Alice or Francine" }
 };
 
 // Function to Display Assignments
@@ -277,7 +277,7 @@ God grant me the serenity to accept the things I cannot change, the courage to c
 PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy; neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.
 
 (Ask the CoHost to post the Safety Card)
-We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap your share up when you hear the beep. (Have one of the cohosts take care of this)
+We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)
 
 I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.
 (Friend reads How It Works):
