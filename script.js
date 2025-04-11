@@ -292,13 +292,13 @@ function generateScript() {
     "We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)",
     "",
     "I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.",
-    `<span class="source-info">${howItWorksSource}</span>`,
+    `<p class="source-info">${howItWorksSource}</p>`, // Match the structure of other readings
     "(Friend reads How It Works):",
     "",
     `<div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
     `I’ve asked a friend to read ${selectedPrayer}`,
-    `<span class="source-info">${firstPrayerSource}</span>`,
+    `<p class="source-info">${firstPrayerSource}</p>`,
     firstReadingLabel,
     "",
     `<div class="reading-content">${firstPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
@@ -341,7 +341,7 @@ function generateScript() {
     "If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.",
     "",
     `I’ve asked a friend to read ${selectedSecondPrayer}`,
-    `<span class="source-info">${secondPrayerSource}</span>`,
+    `<p class="source-info">${secondPrayerSource}</p>`,
     secondReadingLabel,
     "",
     `<div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
@@ -352,8 +352,8 @@ function generateScript() {
 
   // Convert script lines to HTML with <p> tags
   const scriptHTML = scriptLines.map(line => {
-    if (line.includes('<span class="source-info">') || line.includes('<div class="reading-content">')) {
-      return `<p>${line}</p>`; // Ensure source info and readings are wrapped in a <p> tag
+    if (line.includes('<span class="source-info">') || line.includes('<div class="reading-content">') || line.includes('<p class="source-info">')) {
+      return line; // Already formatted as HTML for source info and readings
     }
     return `<p>${line}</p>`;
   }).join('');
