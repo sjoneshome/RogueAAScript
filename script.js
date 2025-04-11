@@ -4,6 +4,27 @@ let secretaryName;
 let selectedPrayer = "";
 let selectedSecondPrayer = "";
 
+// Schedule Data
+const schedule = {
+  "Sunday": { secretary: "Sophie P", host: "Sophie P", cohost: "Eliseo" },
+  "Monday": { secretary: "M", host: "M", cohost: "Francine" },
+  "Tuesday": { secretary: "Vanessa aka Skittles", host: "Vanessa aka Skittles", cohost: "Alice" },
+  "Wednesday": { secretary: "Carlton", host: "Carlton", cohost: "Eliseo" }, // Updated from Anthony to Carlton
+  "Thursday": { secretary: "Stacie Donahue", host: "Stacie Donahue", cohost: "Stephen" },
+  "Friday": { secretary: "Dayna D & Chris Junghans", host: "Dayna D & Chris Junghans", cohost: "Alice" },
+  "Saturday": { secretary: "Stephen Jones", host: "Stephen Jones", cohost: "Alice or Francine (rotating)" }
+};
+
+// Function to Display Assignments
+function displayAssignments(day) {
+  const assignments = schedule[day];
+  if (assignments) {
+    const displayDiv = document.getElementById('assignments-display');
+    displayDiv.textContent = `The assigned Secretary, Host & CoHost for the evening based upon day selected: Secretary: ${assignments.secretary}, Host: ${assignments.host}, CoHost: ${assignments.cohost}`;
+    displayDiv.style.display = 'block';
+  }
+}
+
 // Helper Functions
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -363,6 +384,9 @@ I’ve asked a friend to lead us out with the serenity prayer of their choice.
 
   document.getElementById('copy-first-reading-button').textContent = "Copy " + selectedPrayer + " as Text";
   document.getElementById('copy-second-reading-button').textContent = "Copy " + selectedSecondPrayer + " as Text";
+
+  // Display the assignments for the selected day
+  displayAssignments(selectedDay);
 }
 
 function displayScriptAsImage() {
