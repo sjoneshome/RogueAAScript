@@ -295,13 +295,13 @@ function generateScript() {
     `<span class="source-info">${howItWorksSource}</span>`,
     "(Friend reads How It Works):",
     "",
-    ...howItWorksText.split('\n'),
+    `<div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
     `I’ve asked a friend to read ${selectedPrayer}`,
     `<span class="source-info">${firstPrayerSource}</span>`,
     firstReadingLabel,
     "",
-    ...firstPrayerText.split('\n'),
+    `<div class="reading-content">${firstPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
     "Not to embarrass anyone but to get to know you better after the meeting, is there anyone with less than 30 days of continuous sobriety? Please raise virtual hand or wave if you are on camera so we can unmute you. If so, please introduce yourself by your first name.",
     "(Take notes of newcomers, out of towners and first timers)",
@@ -340,11 +340,11 @@ function generateScript() {
     "",
     "If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.",
     "",
-    `I’ve asked a friend to read ${selectedSecondPrayer}`,
+    `I’ve asked a friend to read ${selectedPrayer}`,
     `<span class="source-info">${secondPrayerSource}</span>`,
     secondReadingLabel,
     "",
-    ...secondPrayerText.split('\n'),
+    `<div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
     "I’ve asked a friend to lead us out with the serenity prayer of their choice.",
     "(Friend reads serenity prayer of their choice): “God”"
@@ -352,8 +352,8 @@ function generateScript() {
 
   // Convert script lines to HTML with <p> tags
   const scriptHTML = scriptLines.map(line => {
-    if (line.includes('<span class="source-info">')) {
-      return `<p>${line}</p>`; // Ensure source info is wrapped in a <p> tag
+    if (line.includes('<span class="source-info">') || line.includes('<div class="reading-content">')) {
+      return `<p>${line}</p>`; // Ensure source info and readings are wrapped in a <p> tag
     }
     return `<p>${line}</p>`;
   }).join('');
@@ -364,6 +364,9 @@ function generateScript() {
 
   // Log the script content for debugging
   console.log("Generated script HTML:", scriptHTML);
+
+  // Debug: Log the DOM content after rendering
+  console.log("Rendered DOM content:", scriptContainer.innerHTML);
 
   document.getElementById('how-it-works-text').textContent = howItWorksText;
   document.getElementById('first-reading-text').textContent = firstPrayerText;
