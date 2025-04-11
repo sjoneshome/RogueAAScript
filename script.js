@@ -291,13 +291,13 @@ PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their 
 We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)
 
 I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.
-(${howItWorksSource})
+${howItWorksSource}
 (Friend reads How It Works):
 
 ${howItWorksText}
 
 I’ve asked a friend to read ${selectedPrayer}
-(${firstPrayerSource})
+${firstPrayerSource}
 ${firstReadingLabel}
 
 ${firstPrayerText}
@@ -340,7 +340,7 @@ Any non-AA announcements?
 If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.
 
 I’ve asked a friend to read ${selectedSecondPrayer}
-(${secondPrayerSource})
+${secondPrayerSource}
 ${secondReadingLabel}
 
 ${secondPrayerText}
@@ -350,9 +350,15 @@ I’ve asked a friend to lead us out with the serenity prayer of their choice.
 `;
 
   const scriptContainer = document.getElementById('generated-script');
+  // Ensure the container preserves whitespace and line breaks
+  scriptContainer.style.whiteSpace = 'pre-wrap';
   scriptContainer.textContent = script;
   scriptContainer.style.maxHeight = 'none';
-  setTimeout(displayScriptAsImage, 100);
+
+  // Ensure the content is fully rendered before capturing
+  setTimeout(() => {
+    displayScriptAsImage();
+  }, 100);
 
   document.getElementById('how-it-works-text').textContent = howItWorksText;
   document.getElementById('first-reading-text').textContent = firstPrayerText;
@@ -370,10 +376,23 @@ I’ve asked a friend to lead us out with the serenity prayer of their choice.
 
 function displayScriptAsImage() {
   const container = document.getElementById('generated-script');
-  html2canvas(container, { backgroundColor: null }).then(canvas => {
+  // Ensure the container is styled to preserve formatting
+  container.style.whiteSpace = 'pre-wrap';
+  container.style.fontFamily = 'monospace';
+  container.style.fontSize = '14px';
+  container.style.lineHeight = '1.5';
+
+  html2canvas(container, { 
+    backgroundColor: null,
+    scale: 2, // Increase resolution for better clarity
+    logging: true // Enable logging for debugging
+  }).then(canvas => {
     const dataURL = canvas.toDataURL("image/jpeg");
     container.innerHTML = `<img src="${dataURL}" style="max-width:100%; display: block; margin: 0 auto;" alt="Meeting Script Image"/>`;
-    container.style.height = "auto";
+    container.style.height = 'auto';
+  }).catch(error => {
+    console.error("html2canvas error:", error);
+    alert("Failed to render script as image: " + error.message);
   });
 }
 
