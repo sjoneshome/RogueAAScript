@@ -37,8 +37,8 @@ h2 {
 
 .bubble {
   display: inline-block;
-  background-color: #1d1d1f;
-  color: #fff;
+  background-color: #1d1d1f !important; /* Enforce black background */
+  color: #fff !important; /* Enforce white text */
   padding: 10px 20px;
   margin: 5px;
   border-radius: 20px;
@@ -47,7 +47,7 @@ h2 {
 }
 
 .bubble:hover {
-  background-color: #333;
+  background-color: #333 !important; /* Enforce hover color */
 }
 
 input[type="text"] {
