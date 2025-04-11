@@ -353,7 +353,7 @@ function generateScript() {
   // Convert script lines to HTML with <p> tags
   const scriptHTML = scriptLines.map(line => {
     if (line.includes('<span class="source-info">')) {
-      return line; // Already formatted as HTML for source info
+      return `<p>${line}</p>`; // Ensure source info is wrapped in a <p> tag
     }
     return `<p>${line}</p>`;
   }).join('');
@@ -361,6 +361,9 @@ function generateScript() {
   const scriptContainer = document.getElementById('generated-script');
   scriptContainer.innerHTML = scriptHTML;
   scriptContainer.style.maxHeight = 'none';
+
+  // Log the script content for debugging
+  console.log("Generated script HTML:", scriptHTML);
 
   // Ensure the content is fully rendered before capturing
   setTimeout(() => {
@@ -388,18 +391,22 @@ function displayScriptAsImage() {
   container.style.fontSize = '14px';
   container.style.lineHeight = '1.5';
   container.style.padding = '10px';
+  container.style.maxHeight = 'none'; // Ensure no clipping during capture
 
   html2canvas(container, { 
     backgroundColor: null,
     scale: 2, // Increase resolution for better clarity
-    logging: true // Enable logging for debugging
+    logging: true, // Enable logging for debugging
+    useCORS: true // Handle any cross-origin issues
   }).then(canvas => {
     const dataURL = canvas.toDataURL("image/jpeg");
     container.innerHTML = `<img src="${dataURL}" style="max-width:100%; display: block; margin: 0 auto;" alt="Meeting Script Image"/>`;
     container.style.height = 'auto';
   }).catch(error => {
     console.error("html2canvas error:", error);
-    alert("Failed to render script as image: " + error.message);
+    alert("Failed to render script as image. Displaying as HTML instead: " + error.message);
+    // Fallback: Keep the HTML content if html2canvas fails
+    container.style.maxHeight = 'none';
   });
 }
 
