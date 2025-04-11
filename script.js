@@ -362,12 +362,6 @@ function generateScript() {
   scriptContainer.innerHTML = scriptHTML;
   scriptContainer.style.maxHeight = 'none';
 
-  // Log the script content for debugging
-  console.log("Generated script HTML:", scriptHTML);
-
-  // Debug: Log the DOM content after rendering
-  console.log("Rendered DOM content:", scriptContainer.innerHTML);
-
   // Populate the CoHost section with source information
   const howItWorksHTML = `
     <p class="source-info">${howItWorksSource}</p>
@@ -382,19 +376,9 @@ function generateScript() {
     <div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>
   `;
 
-  // Log the HTML content being set for the CoHost section
-  console.log("How It Works HTML:", howItWorksHTML);
-  console.log("First Reading HTML:", firstReadingHTML);
-  console.log("Second Reading HTML:", secondReadingHTML);
-
   document.getElementById('how-it-works-text').innerHTML = howItWorksHTML;
   document.getElementById('first-reading-text').innerHTML = firstReadingHTML;
   document.getElementById('second-reading-text').innerHTML = secondReadingHTML;
-
-  // Debug: Log the DOM content of the CoHost section after rendering
-  console.log("How It Works DOM:", document.getElementById('how-it-works-text').innerHTML);
-  console.log("First Reading DOM:", document.getElementById('first-reading-text').innerHTML);
-  console.log("Second Reading DOM:", document.getElementById('second-reading-text').innerHTML);
 
   document.getElementById('copy-script-button').style.display = 'block';
   document.getElementById('view-cohost-button').style.display = 'block';
