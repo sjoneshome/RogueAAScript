@@ -321,7 +321,7 @@ function generateScript() {
     "This meeting goes until 15 after. The chat will be open at 11 pm. Those with questions, please stay for the meeting after the meeting, or reach out to host/co host and they will do their best to help.",
     "",
     "(Ask the CoHost to post the 7th Tradition)",
-    "The 7th Tradition states we are fully self supporting through our own contributions. Please give what you can. In order to pay for our yearly Zoom subscription and for the email attendance verification service, we need to collect $20 per month. Thank you in advance for your contribution here. If you can’t contribute, please stay for the message. It is free and life saving.",
+    "The 7th Tradition states we are fully self supporting through our own contributions. Please give what you can. In order to pay for our yearly Zoom subscription and donations to the local service structure. Thank you in advance for your contribution here. If you can’t contribute, please stay for the message. It is free and life saving.",
     "7th Tradition: Venmo: Silvia-castillo-40718",
     "",
     "(Select a reading from AA Approved Literature and read to the group. Announce the topic and share for 3-5 minutes. Open up for discussion.)",
