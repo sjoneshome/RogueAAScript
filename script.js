@@ -130,8 +130,8 @@ async function copySectionAsImage(elementId) {
     img.style.margin = '20px 0';
     img.style.display = 'block';
 
-    const container = document.getElementById('generated-script') || document.body;
-    container.appendChild(img);
+    // Insert the image right after the element so it's visible on either page
+    element.parentNode.insertBefore(img, element.nextSibling);
 
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       alert("Image displayed below. Tap and hold the image, then select 'Save Image' or 'Add to Photos' to save it to your Camera Roll.");
@@ -146,11 +146,11 @@ async function copySectionAsImage(elementId) {
     link.style.display = 'block';
     link.style.marginTop = '10px';
     link.style.marginBottom = '20px';
-    container.appendChild(link);
+    img.parentNode.insertBefore(link, img.nextSibling);
 
     const cleanup = () => {
-      if (img.parentNode) container.removeChild(img);
-      if (link.parentNode) container.removeChild(link);
+      if (img.parentNode) img.parentNode.removeChild(img);
+      if (link.parentNode) link.parentNode.removeChild(link);
       URL.revokeObjectURL(url);
     };
     setTimeout(cleanup, 30000);
