@@ -120,11 +120,44 @@ async function copySectionAsImage(elementId) {
     if (!element) throw new Error("Element not found.");
     const canvas = await html2canvas(element, { backgroundColor: null });
     const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-    const clipboardItem = new ClipboardItem({ "image/png": blob });
-    await navigator.clipboard.write([clipboardItem]);
-    alert("Copied as image!");
+    const url = URL.createObjectURL(blob);
+
+    const img = document.createElement('img');
+    img.src = url;
+    img.style.maxWidth = '100%';
+    img.style.borderRadius = '8px';
+    img.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+    img.style.margin = '20px 0';
+    img.style.display = 'block';
+
+    const container = document.getElementById('generated-script') || document.body;
+    container.appendChild(img);
+
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      alert("Image displayed below. Tap and hold the image, then select 'Save Image' or 'Add to Photos' to save it to your Camera Roll.");
+    } else {
+      alert("Image displayed below. Right-click or long-press to save, or use the download link.");
+    }
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `meeting_script_${new Date().toISOString().slice(0, 10)}.png`;
+    link.textContent = 'Download Image (Fallback)';
+    link.style.display = 'block';
+    link.style.marginTop = '10px';
+    link.style.marginBottom = '20px';
+    container.appendChild(link);
+
+    const cleanup = () => {
+      if (img.parentNode) container.removeChild(img);
+      if (link.parentNode) container.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+    setTimeout(cleanup, 30000);
+    img.onclick = cleanup;
+
   } catch (error) {
-    alert("Error copying section as image: " + error);
+    alert("Error generating or displaying image: " + error);
   }
 }
 
