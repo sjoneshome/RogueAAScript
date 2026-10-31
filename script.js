@@ -184,62 +184,24 @@ async function copyMeetingPostingsImageToClipboard() {
     await navigator.clipboard.write([clipboardItem]);
     alert("Meeting postings copied as image!");
   } catch (error) {
-    alert("Error copying meeting postings image: " + error);
+    alert("Error copying meeting postings as image: " + error);
   }
 }
 
-async function copyAllMeetingPostings() {
-  try {
-    const img = document.getElementById('safety-card-img');
-    if (!img || !img.complete) throw new Error("Safety Card image not loaded yet.");
-    const canvas = document.createElement("canvas");
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL("image/png");
-    const attendanceText = document.getElementById('attendance-verification-text').textContent;
-    const howItWorksText = document.getElementById('how-it-works-text').textContent;
-    const firstReadingText = document.getElementById('first-reading-text').textContent;
-    const traditionText = document.getElementById('tradition-text').textContent;
-    const secondReadingText = document.getElementById('second-reading-text').textContent;
-    const htmlContent = `
-<div>
-  <div><img src="${dataURL}" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);" /></div>
-  <div><p>${attendanceText}</p></div>
-  <div><p>${howItWorksText}</p></div>
-  <div><p>${firstReadingText}</p></div>
-  <div><p>${traditionText}</p></div>
-  <div><p>${secondReadingText}</p></div>
-</div>`;
-    const blob = new Blob([htmlContent], { type: "text/html" });
-    const clipboardItem = new ClipboardItem({ "text/html": blob });
-    await navigator.clipboard.write([clipboardItem]);
-    alert("All meeting postings copied as text!");
-  } catch (error) {
-    alert("Error copying all meeting postings: " + error);
-  }
-}
-
-// User Interaction Functions
 function selectDay(day) {
   selectedDay = day;
   document.getElementById('day-selection').style.display = 'none';
   document.getElementById('next-step').style.display = 'block';
-  setTimeout(() => {
-    const nameInput = document.getElementById('secretary-name');
-    if (nameInput) nameInput.focus();
-  }, 300);
 }
 
 function submitName() {
   secretaryName = document.getElementById('secretary-name').value.trim();
-  if (secretaryName) {
-    document.getElementById('next-step').style.display = 'none';
-    document.getElementById('prayer-selection').style.display = 'block';
-  } else {
+  if (!secretaryName) {
     alert("Please enter your name.");
+    return;
   }
+  document.getElementById('next-step').style.display = 'none';
+  document.getElementById('prayer-selection').style.display = 'block';
 }
 
 function selectPrayer(prayer) {
@@ -261,7 +223,6 @@ function generateScript() {
   const firstReadingLabel = "(Friend reads " + selectedPrayer + "):";
   const secondReadingLabel = "(Friend reads " + selectedSecondPrayer + "):";
 
-  // Define source information for each reading
   const howItWorksSource = "Source: Big Book, Chapter 5, pages 58-60, start at 'Rarely have we seen a person fail...' and stop at 'That God could and would if He were sought.'";
   const firstPrayerSource = selectedPrayer === "12 Traditions short form" 
     ? "Source: Big Book, Appendix I, page 562, start at '1. Our common welfare...' and stop at '12. Anonymity is the spiritual foundation...'" 
@@ -272,7 +233,6 @@ function generateScript() {
     ? "Source: Big Book, Chapter 11, page 164, start at 'Our book is meant to be suggestive only...' and stop at 'May God bless you and keep you—until then.'" 
     : "Source: Big Book, Chapter 6, pages 83-84, start at 'If we are painstaking about this phase...' and stop at 'They will always materialize if we work for them.'";
 
-  // Split the script into lines and wrap each line in a <p> tag
   const scriptLines = [
     "Rogue Format",
     "FOLLOW THE FORMAT",
@@ -289,10 +249,10 @@ function generateScript() {
     "PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy; neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.",
     "",
     "(Ask the CoHost to post the Safety Card)",
-    "We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. At this time we have attendees muted once meeting starts and you will receive a prompt to unmute. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)",
+    "We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)",
     "",
     "I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.",
-    `<p class="source-info">${howItWorksSource}</p>`, // Match the structure of other readings
+    `<p class="source-info">${howItWorksSource}</p>`,
     "(Friend reads How It Works):",
     "",
     `<div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
@@ -303,30 +263,32 @@ function generateScript() {
     "",
     `<div class="reading-content">${firstPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
-    "Not to embarrass anyone but to get to know you better after the meeting, is there anyone with less than 30 days of continuous sobriety? Please raise virtual hand or wave if you are on camera so we can unmute you. If so, please introduce yourself by your first name.",
+    "Is there anyone with 29 days or less of continuous sobriety? This is not to embarrass you, but to get to know you better. Raise your virtual hand or wave at the camera so you can introduce yourself by your first name.",
     "(Take notes of newcomers, out of towners and first timers)",
     "",
-    "Anyone here for the 1st time or anyone from outside the San Diego area that has not been here before?",
+    "Is there anyone here for the 1st time or anyone from outside the San Diego area who would like to introduce themselves?",
     "Welcome everyone!",
     "",
-    "We celebrate earned lengths of sobriety: 30, 60, 90 days, 6 months, 9 months, a year and for each year after. Anyone celebrating any of these lengths of time tonight or in the last week? (Ask them how they did it.)",
+    "We celebrate earned lengths of sobriety: 30, 60, 90 days, 6 months, 9 months, a year and for each year after. Is there anyone celebrating any of these lengths of time tonight or in the last 6 days? (Ask them how they did it.)",
     "Congratulations to everyone on another 24hrs.",
     "(Take note of any celebrations)",
     "",
     "(Ask the CoHost to post the Attendance Verification)",
-    "Attendance Verification: Here’s how the attendance system works! At each meeting, click on the link, it takes you to a form, fill out the form with your first and last name, the date you attended, and your email. Once you submit it, the system will automatically send you an email confirming your attendance. Please enter your email correctly and check your spam/junk folder.",
+    "Attendance Verification: At each meeting, click on the link, fill out the form with your first and last name, date you attended, and your email. Once you submit it, the system will automatically send you an email confirming your attendance. Please enter your email correctly and check your spam or junk folder.",
     "",
     "https://sjoneshome.github.io/Rogue-AA/",
+    "",
+    "If you see an error message, do not submit another verification. We have a limited number of submissions each month, and exceeding that limit will suspend the service until the next month. The error message now includes all the information needed to verify your attendance for today. Just follow the instructions provided in the message.",
     "",
     "This meeting goes until 15 after. The chat will be open at 11 pm. Those with questions, please stay for the meeting after the meeting, or reach out to host/co host and they will do their best to help.",
     "",
     "(Ask the CoHost to post the 7th Tradition)",
-    "The 7th Tradition states we are fully self supporting through our own contributions. Please give what you can. In order to pay for our yearly Zoom subscription and donations to the local service structure. Thank you in advance for your contribution here. If you can’t contribute, please stay for the message. It is free and life saving.",
+    "The 7th Tradition states we are fully self supporting through our own contributions. Please give what you can. This pays for our yearly Zoom subscription and donations to the local service structure in San Diego. Thank you in advance for your contribution here. If you can’t contribute, please stay for the message. It is free and life saving.",
     "7th Tradition: Venmo: Silvia-castillo-40718",
     "",
     "(Select a reading from AA Approved Literature and read to the group. Announce the topic and share for 3-5 minutes. Open up for discussion.)",
     "",
-    "For the 1st half of the meeting I’ll call on people to share, the second half I’ll open it up to those that have not yet had the opportunity to share. At this meeting we do not cross talk - providing other members advice, interrupting anyone or commenting on their share. This is in order for members to feel they can share freely and openly. (This includes host, secretary of meeting.) If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.",
+    "For the 1st half of the meeting, I’ll call on people to share. For the 2nd half, I’ll open it up to those who would like to share. At this meeting we do not cross talk - which is providing other members advice, addressing anyone directly, or commenting on their share. This is in order for members to feel they can share freely and openly. (This includes host, secretary of meeting.) If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.",
     "",
     "(Discussion Period)",
     "",
@@ -347,13 +309,17 @@ function generateScript() {
     `<div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
     "I’ve asked a friend to lead us out with the serenity prayer of their choice.",
-    "(Friend reads serenity prayer of their choice): “God”"
+    "(Friend reads serenity prayer of their choice): “God”",
+    "",
+    "And that's another mutha fkn meeting!!",
+    "",
+    "Welcome to the parking lot!",
+    "Everyone can unmute. Is there anyone who would like to share who didn't get to?"
   ];
 
-  // Convert script lines to HTML with <p> tags
   const scriptHTML = scriptLines.map(line => {
     if (line.includes('<span class="source-info">') || line.includes('<div class="reading-content">') || line.includes('<p class="source-info">')) {
-      return line; // Already formatted as HTML for source info and readings
+      return line;
     }
     return `<p>${line}</p>`;
   }).join('');
@@ -362,7 +328,6 @@ function generateScript() {
   scriptContainer.innerHTML = scriptHTML;
   scriptContainer.style.maxHeight = 'none';
 
-  // Populate the CoHost section with source information
   const howItWorksHTML = `
     <p class="source-info">${howItWorksSource}</p>
     <div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>
@@ -386,11 +351,9 @@ function generateScript() {
   document.getElementById('copy-first-reading-button').textContent = "Copy " + selectedPrayer + " as Text";
   document.getElementById('copy-second-reading-button').textContent = "Copy " + selectedSecondPrayer + " as Text";
 
-  // Display the assignments for the selected day
   displayAssignments(selectedDay);
 }
 
-// Global Functions for Inline Event Handlers
 function handleKey(event) {
   if (event.key === "Enter") submitName();
 }
