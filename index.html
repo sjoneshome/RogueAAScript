@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rogue AA Meeting Script Generator</title>
-  <!-- Load html2canvas from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <!-- Load external styles -->
   <link rel="stylesheet" href="/RogueAAScript/styles.css">
 </head>
 <body>
   <div class="container">
-    <!-- Display for assigned Secretary, Host, and CoHost -->
-    <div id="assignments-display" style="display: none; text-align: center; margin-bottom: 20px; font-weight: bold; font-size: 1.2em;">
-      <!-- Populated dynamically -->
+    <!-- Top button for CoHost instructions -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <button id="view-cohost-button-top" onclick="showCohostInstructions()" style="display: none;">
+        View CoHost Instructions
+      </button>
     </div>
+
     <!-- Page One: Secretary (Meeting Script) -->
     <div id="secretary-page">
       <h1>Secretary: Meeting Script</h1>
@@ -45,13 +46,14 @@
         <div class="bubble" onclick="selectSecondPrayer('The Promises')">The Promises</div>
       </div>
       <div id="generated-script"></div>
-      <button id="copy-script-button" style="display: none;" onclick="copyToClipboard('generated-script')">
+      <button id="copy-script-button" style="display: none;" onclick="copyToClipboardWithLimit('generated-script')">
         Copy Meeting Script as Text
       </button>
       <button id="view-cohost-button" style="display: none;" onclick="showCohostInstructions()">
         Next: View CoHost Instructions
       </button>
     </div>
+
     <!-- Page Two: CoHost Instructions -->
     <div id="cohost-instructions" style="display: none;">
       <h1>CoHost Instructions</h1>
@@ -132,7 +134,6 @@ The 7th Tradition states we are fully self supporting through our own contributi
       <button onclick="goBackToSecretaryPage()">Back to Secretary Page</button>
     </div>
   </div>
-  <!-- Load external scripts -->
   <script src="/RogueAAScript/readings.js"></script>
   <script src="/RogueAAScript/script.js"></script>
 </body>
