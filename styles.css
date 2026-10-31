@@ -37,8 +37,8 @@ h2 {
 
 .bubble {
   display: inline-block;
-  background-color: #1d1d1f !important; /* Enforce black background */
-  color: #fff !important; /* Enforce white text */
+  background-color: #1d1d1f !important;
+  color: #fff !important;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 20px;
@@ -47,7 +47,7 @@ h2 {
 }
 
 .bubble:hover {
-  background-color: #333 !important; /* Enforce hover color */
+  background-color: #333 !important;
 }
 
 input[type="text"] {
@@ -88,7 +88,7 @@ button:hover {
 }
 
 #generated-script p {
-  margin: 0 0 10px 0; /* Ensure proper spacing between lines */
+  margin: 0 0 10px 0;
 }
 
 .chat-message {
@@ -147,7 +147,6 @@ button:hover {
   transition: width 0.3s ease;
 }
 
-/* Style for source information */
 .source-info {
   font-style: italic;
   color: #555;
@@ -155,13 +154,24 @@ button:hover {
   display: block;
 }
 
-/* Style for reading content */
 .reading-content {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* Ensure reading content paragraphs are properly spaced */
 .reading-content p {
   margin: 0 0 10px 0;
+}
+
+/* Sticky CoHost button so it stays at the top on both laptop and phone */
+#view-cohost-button {
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  margin-bottom: 20px;
+}
+
+#copy-script-button {
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
