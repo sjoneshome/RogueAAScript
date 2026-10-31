@@ -15,16 +15,6 @@ const schedule = {
   "Saturday": { secretary: "Stephen", host: "Eliseo", cohost: "Alice or Francine" }
 };
 
-// Function to Display Assignments
-function displayAssignments(day) {
-  const assignments = schedule[day];
-  if (assignments) {
-    const displayDiv = document.getElementById('assignments-display');
-    displayDiv.textContent = `The assigned Secretary, Host & CoHost for the evening based upon day selected: Secretary: ${assignments.secretary}, Host: ${assignments.host}, CoHost: ${assignments.cohost}`;
-    displayDiv.style.display = 'block';
-  }
-}
-
 // Helper Functions
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -130,7 +120,6 @@ async function copySectionAsImage(elementId) {
     img.style.margin = '20px 0';
     img.style.display = 'block';
 
-    // Insert the image right after the element so it's visible on either page
     element.parentNode.insertBefore(img, element.nextSibling);
 
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -380,11 +369,10 @@ function generateScript() {
 
   document.getElementById('copy-script-button').style.display = 'block';
   document.getElementById('view-cohost-button').style.display = 'block';
+  document.getElementById('view-cohost-button-top').style.display = 'inline-block';
 
   document.getElementById('copy-first-reading-button').textContent = "Copy " + selectedPrayer + " as Text";
   document.getElementById('copy-second-reading-button').textContent = "Copy " + selectedSecondPrayer + " as Text";
-
-  displayAssignments(selectedDay);
 }
 
 function handleKey(event) {
