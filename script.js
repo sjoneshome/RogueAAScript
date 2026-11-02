@@ -15,6 +15,16 @@ const schedule = {
   "Saturday": { secretary: "Stephen", host: "Eliseo", cohost: "Alice or Francine" }
 };
 
+// Function to Display Assignments
+function displayAssignments(day) {
+  const assignments = schedule[day];
+  if (assignments) {
+    const displayDiv = document.getElementById('assignments-display');
+    displayDiv.textContent = `The assigned Secretary, Host & CoHost for the evening based upon day selected: Secretary: ${assignments.secretary}, Host: ${assignments.host}, CoHost: ${assignments.cohost}`;
+    displayDiv.style.display = 'block';
+  }
+}
+
 // Helper Functions
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -262,7 +272,7 @@ function generateScript() {
     `Welcome to the ${selectedDay} Just Some F*cking Online Rogue AA Meeting.`,
     `My name is ${secretaryName}, and I am your alcoholic secretary. So that we may have an uninterrupted meeting, please remain muted if you are not sharing.`,
     "",
-    "I’d like to start the meeting with a moment of silence followed by the serenity prayer.",
+    "I'd like to start the meeting with a moment of silence followed by the Serenity Prayer.",
     "",
     "(Read Prayer):",
     "",
@@ -271,15 +281,15 @@ function generateScript() {
     "PREAMBLE: Alcoholics Anonymous is a fellowship of men and women who share their experience, strength and hope with each other that they may solve their common problem and help others to recover from alcoholism. The only requirement for membership is a desire to stop drinking. There are no dues or fees for AA membership; we are self-supporting through our own contributions. AA is not allied with any sect, denomination, politics, organization or institution; does not engage in any controversy; neither endorses nor opposes any causes. Our primary purpose is to stay sober and help other alcoholics to achieve sobriety.",
     "",
     "(Ask the CoHost to post the Safety Card)",
-    "We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let’s be mindful and respectful of the room. If you are moving around please keep cameras off as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)",
+    "We try our absolute best here to provide a safe, welcoming atmosphere of recovery. Please let's be mindful and respectful of the room. At this time we have attendees muted once the meeting starts and you will receive a prompt to unmute. If you are moving around please keep your camera off, as not to distract others. We implement a timer here, so please wrap up your share when you hear the beep. (Have one of the cohosts take care of this)",
     "",
-    "I’ve asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.",
+    "I've asked a friend to read How it Works from the Big Book of Alcoholics Anonymous.",
     `<p class="source-info">${howItWorksSource}</p>`,
     "(Friend reads How It Works):",
     "",
     `<div class="reading-content">${howItWorksText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
-    `I’ve asked a friend to read ${selectedPrayer}`,
+    `I've asked a friend to read ${selectedPrayer}`,
     `<p class="source-info">${firstPrayerSource}</p>`,
     firstReadingLabel,
     "",
@@ -288,11 +298,11 @@ function generateScript() {
     "Is there anyone with 29 days or less of continuous sobriety? This is not to embarrass you, but to get to know you better. Raise your virtual hand or wave at the camera so you can introduce yourself by your first name.",
     "(Take notes of newcomers, out of towners and first timers)",
     "",
-    "Is there anyone here for the 1st time or anyone from outside the San Diego area who would like to introduce themselves?",
+    "Is anyone joining us for the first time, whether you're from San Diego or outside the area, who would like to introduce themselves? If so, please share your first name and where you're joining us from.",
     "Welcome everyone!",
     "",
-    "We celebrate earned lengths of sobriety: 30, 60, 90 days, 6 months, 9 months, a year and for each year after. Is there anyone celebrating any of these lengths of time tonight or in the last 6 days? (Ask them how they did it.)",
-    "Congratulations to everyone on another 24hrs.",
+    "Here at Rogue, we celebrate earned lengths of sobriety: 30, 60, 90 days, 6 months, 9 months, one year & multiple years. Is there anyone celebrating any of these lengths of time tonight or in the last week? (Ask them how they did it.)",
+    "Congratulations to everyone on another 24!",
     "(Take note of any celebrations)",
     "",
     "(Ask the CoHost to post the Attendance Verification)",
@@ -302,41 +312,36 @@ function generateScript() {
     "",
     "If you see an error message, do not submit another verification. We have a limited number of submissions each month, and exceeding that limit will suspend the service until the next month. The error message now includes all the information needed to verify your attendance for today. Just follow the instructions provided in the message.",
     "",
-    "This meeting goes until 15 after. The chat will be open at 11 pm. Those with questions, please stay for the meeting after the meeting, or reach out to host/co host and they will do their best to help.",
+    "This meeting goes until 15 after. The chat will be open at 11pm. Those with questions, please stay for the meeting after the meeting, or reach out to the host or co-host and we will do our best to help.",
     "",
     "(Ask the CoHost to post the 7th Tradition)",
-    "The 7th Tradition states we are fully self supporting through our own contributions. Please give what you can. This pays for our yearly Zoom subscription and donations to the local service structure in San Diego. Thank you in advance for your contribution here. If you can’t contribute, please stay for the message. It is free and life saving.",
+    "The 7th Tradition states we are fully self-supporting through our own contributions. Please give what you can. This pays for our yearly Zoom subscription and donations to the local service structure in San Diego. If you can't contribute, please stay for the message. It is free and life-saving.",
     "7th Tradition: Venmo: Silvia-castillo-40718",
     "",
     "(Select a reading from AA Approved Literature and read to the group. Announce the topic and share for 3-5 minutes. Open up for discussion.)",
     "",
-    "For the 1st half of the meeting, I’ll call on people to share. For the 2nd half, I’ll open it up to those who would like to share. At this meeting we do not cross talk - which is providing other members advice, addressing anyone directly, or commenting on their share. This is in order for members to feel they can share freely and openly. (This includes host, secretary of meeting.) If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.",
+    "For the 1st half of the meeting I'll call on people to share, the second half I'll open it up to those that have not yet had the opportunity to share. At this meeting we do not cross talk- which is providing other members advice, addressing anyone directly, or commenting on their share. This is so members feel they can share freely and openly. (This includes host and secretary.) If you have had a drink or drug in the last 24 hrs, we ask that you just listen. We want to hear from you, not the intoxicant.",
     "",
     "(Discussion Period)",
     "",
     "Closing (11:15 pm)",
-    "That’s all the time we have for sharing today. Welcome again to newcomers, first timers, out-of-towners, and celebrants. (Announce the names of newcomers, out-of-towners, and first timers.) If you wanted to share during the meeting and did not get a chance to, please reach out in the chat, or stay for the meeting after the meeting.",
+    "That's all the time we have for sharing today. I'd like to welcome newcomers (names) first timers & out of towners (names) and celebrants (names). If you wanted to share during the meeting and did not get a chance to, please reach out in the chat, or stay for the meeting after the meeting.",
     "",
-    "As a reminder to all: “What you see here, what you hear here, when you leave here, let it stay here.”",
+    "As a reminder to all: \"What you see here, what you hear here, when you leave here, let it stay here.\"",
     "",
     "Are there any AA announcements?",
     "Any non-AA announcements?",
     "",
     "If you are willing to be a sponsor for someone, at least on a temporary basis, please raise your hand or put your info in the chat.",
     "",
-    `I’ve asked a friend to read ${selectedSecondPrayer}`,
+    `I've asked a friend to read ${selectedSecondPrayer}`,
     `<p class="source-info">${secondPrayerSource}</p>`,
     secondReadingLabel,
     "",
     `<div class="reading-content">${secondPrayerText.split('\n').map(line => `<p>${line}</p>`).join('')}</div>`,
     "",
-    "I’ve asked a friend to lead us out with the serenity prayer of their choice.",
-    "(Friend reads serenity prayer of their choice): “God”",
-    "",
-    "And that's another mutha fkn meeting!!",
-    "",
-    "Welcome to the parking lot!",
-    "Everyone can unmute. Is there anyone who would like to share who didn't get to?"
+    "____ will now lead us out with the prayer of their choice.",
+    "(Friend reads serenity prayer of their choice): “God”"
   ];
 
   const scriptHTML = scriptLines.map(line => {
@@ -369,10 +374,11 @@ function generateScript() {
 
   document.getElementById('copy-script-button').style.display = 'block';
   document.getElementById('view-cohost-button').style.display = 'block';
-  document.getElementById('view-cohost-button-top').style.display = 'inline-block';
 
   document.getElementById('copy-first-reading-button').textContent = "Copy " + selectedPrayer + " as Text";
   document.getElementById('copy-second-reading-button').textContent = "Copy " + selectedSecondPrayer + " as Text";
+
+  displayAssignments(selectedDay);
 }
 
 function handleKey(event) {
