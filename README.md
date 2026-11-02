@@ -6,6 +6,6 @@ A web-based tool to generate Alcoholics Anonymous (AA) meeting scripts for secre
 - **Secretary Script Generation**: Select a day, enter your name, choose readings, and generate a formatted AA meeting script.
 - **Co-Host Instructions**: Provides pre-formatted text and images (e.g., Safety Card, 7th Tradition) for co-hosts to post during meetings.
 - **Clipboard Support**: Copy scripts and sections as text or images, with segmented copying for long texts.
-- **Modular Design**: Separated into `index.html`, `styles.css`, `script.js`, and `readings.js` for easy updates.
+- **Modular Design**: Separated into `index.html`, `styles.css`, `script.js`, and "readings.js" for easy updates.
 
 ## Project Structure
